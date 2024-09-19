@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Banking</title>
+    <style>
+       /* মোবাইল ফোন স্টাইলিং */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.phone {
+    width: 350px;
+    height: 600px;
+    border: 2px solid #333;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen {
+    width: 90%;
+    height: 90%;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+h3 {
+    margin-bottom: 10px;
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 85%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.pin-section, .reset-section {
+    margin-top: 20px;
+}
+
+.reset-section button {
+    background-color: #dc3545;
+}
+
+.reset-section button:hover {
+    background-color: #c82333;
+}
+ 
+    </style>
+
+</head>
+<body>
+    <div id="reset-form" class="phone">
+        <div class="screen">
+            <h1>Mobile Banking</h1>
+
+            <!-- টাকা যোগ করার জন্য ফর্ম -->
+            <div class="transaction-section">
+                <h3>Add Money</h3>
+                <input type="number" id="add-amount" placeholder="Amount to add">
+                <button id="add-button">Add Money</button>
+            </div>
+
+            <!-- টাকা উত্তোলনের জন্য ফর্ম -->
+            <div class="transaction-section">
+                <h3>Cash Out</h3>
+                <input type="number" id="cash-out-amount" placeholder="Amount to cash out">
+                <button id="cash-out-button">Cash Out</button>
+            </div>
+
+            <!-- পিন ইনপুট -->
+            <div class="pin-section">
+                <h3>Enter Pin</h3>
+                <input type="password" id="pin" placeholder="Enter your pin">
+            </div>
+
+            <!-- ব্যালেন্স দেখানোর সেকশন -->
+            <div>
+                <h2>Current Balance: <span id="balance">0</span> Taka</h2>
+            </div>
+
+            <!-- টাকা রিসেট করার বাটন -->
+            <div class="reset-section">
+                <button id="reset-button">Reset All</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- get add money -->
+    <script>
+        // handler add kora
+     document.getElementById('add-button').addEventListener('click',function(event){
+        event.preventDefault();
+            //  amount add
+        const addAmount = document.getElementById('add-amount').value;
+       const  amountNumber = parseFloat(addAmount);
+
+            // current balance a money add
+        const currentBalance = document.getElementById('balance').innerText;
+
+         const balanceNumber = parseFloat(currentBalance);
+
+         const pinNumber = document.getElementById('pin').value;
+         if(pinNumber=== "1234"){
+            const finalBalance = balanceNumber + amountNumber;
+        //  update balance display kora
+        document.getElementById('balance').innerText = finalBalance; 
+         }
+         else{
+            alert('somting is wrong! please try again later')
+         }
+
+        
+        
+     })
+    </script>
+
+    <!-- get cash out  -->
+     <script>
+        document.getElementById('cash-out-button').addEventListener('click',function(event){
+            event.preventDefault();
+
+            const cashOut = document.getElementById('cash-out-amount').value;
+
+           const  cashOutNumber = parseFloat(cashOut);
+            
+            const currentMoney = document.getElementById('balance').innerText;
+            const balanceNumber = parseFloat(currentMoney);
+
+               const cashOutAfterBalance =  balanceNumber-cashOutNumber ;
+                document.getElementById('balance').innerText = cashOutAfterBalance;
+            
+        })
+     </script>
+
+     <script>
+     const resetButton=   document.getElementById('reset-form').addEventListener('click',function(){
+        resetButton.reset();
+     });
+     </script>
+</body>
+</html>
